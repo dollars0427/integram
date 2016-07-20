@@ -1,0 +1,6 @@
+{
+    "Debug":true,
+    "TrelloKey":"Your trello key",
+    "TrelloSecret":"Your trello secret",
+    "TelegramToken":"Your telegram bot token"
+}
