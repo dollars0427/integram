@@ -18,7 +18,7 @@ type Config struct {
 func loadConfig(filePath string) Config {
 
 	configFile, _ := os.Open(filePath)
-	
+
 	decoder := json.NewDecoder(configFile)
 	config := Config{}
 
@@ -34,7 +34,13 @@ func loadConfig(filePath string) Config {
 
 func main() {
 
-	confPath := os.Args[1]
+	confPath := ""
+
+	if len(os.Args) == 1 {
+		confPath = "config.json"
+	} else {
+		confPath = os.Args[1]
+	}
 
 	config := loadConfig(confPath)
 
