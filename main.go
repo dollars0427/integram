@@ -18,6 +18,7 @@ type Config struct {
 func loadConfig(filePath string) Config {
 
 	configFile, _ := os.Open(filePath)
+	
 	decoder := json.NewDecoder(configFile)
 	config := Config{}
 
