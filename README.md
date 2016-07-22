@@ -1,5 +1,7 @@
-Integram 2.0
+Integram 2.0 - Trello Edition
 ===========
+
+The Fork of Intergram 2.0 (https://github.com/Requilence/integram) which specialized for Trello services.
 
 Framework and platform for integrating services into [Telegram](https://telegram.org) using official [Bot API](https://core.telegram.org/bots/api)
 
@@ -7,21 +9,13 @@ Framework and platform for integrating services into [Telegram](https://telegram
 
 ![Screencast](https://1153359166.rsc.cdn77.org/integram/img/screencast4.gif)
 
-How to use Integram
-------------------
-Just use this links to add integrations you are interested in
-* [Trello](https://telegram.me/trello_bot?start=f_github)
-* [Gitlab](https://telegram.me/gitlab_bot?start=f_github)
-* [Bitbucket](https://telegram.me/bitbucket_bot?start=f_github)
-* [Simple webhook bot](https://telegram.me/Bullhorn_bot?start=f_github)
 
-* [GitHub](https://telegram.me/githubbot) – GitHub bot was developed by [Igor Zhukov](https://github.com/zhukov) and it is not the part of Integram
-
-Not found you favorite service? [🤘 Vote for it](https://telegram.me/integram_bot?start=vote)
-Running Integram on your side
+Running Integram on server
 ------------------
 You can run Integram on your own server. 
-- Create the **main.go** file (example is below)
+
+- Copy the **config.sample.json** file to **config.json**.
+- Write your trello api key, secret and telegram bot token into the **config.json** 
 - Use your own bot created with [Botfather](https://telegram.me/botfather).
 - For the each service you are want to use you need to create an OAuth client(application) in it
 - Set environment variable **GOPATH** to the directory contains **main.go** file
@@ -29,46 +23,8 @@ You can run Integram on your own server.
 - Specify environment variables:
     - **INTEGRAM_PORT** - if set to 443, integram.crt and integram.key must be presented in the root
     - **INTEGRAM_BASE_URL** - the base URL the host accessible with, f.e. **https://integram.org**
-- Run **go run main.go** or **go build && ./integram**
+- Run **go run main.go** or **go build && ./integram** (If you want custom the config file path, you can run the command like this: **go run main.go /etc/integram/config.json**.)
 
-main.go example
-------------------
-```go
-package main
-
-import (
-	"github.com/requilence/integram"
-	"github.com/requilence/integram/services/trello"
-	"github.com/requilence/integram/services/gitlab"
-)
-
-func main() {
-	integram.Debug=true
-	
-	integram.Register(
-        trello.Config{
-            integram.OAuthProvider{
-                ID:     "TRELLO_APP_KEY",
-                Secret: "TRELLO_APP_SECRET",
-            },
-        },
-        "BOT_TOKEN_PROVIDED_BY_@BOTFATHER",
-    )
-
-    integram.Register(
-        gitlab.Config{
-            integram.OAuthProvider{
-                ID:     "GITLAB_APP_ID",
-                Secret: "GITLAB_APP_SECRET",
-            },
-        },
-        "BOT_TOKEN_PROVIDED_BY_@BOTFATHER",
-    )
-
-		
-	integram.Run()
-}
-```
 
 ### Dependencies and vendor directory 
 
